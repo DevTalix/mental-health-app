@@ -21,7 +21,7 @@
       background: linear-gradient(45deg, #6ab7ff, #4caf50);
       color: #333;
       line-height: 1.6;
-      font-size: 16px;
+      font-size: 14px;
     }
 
     a {
@@ -32,7 +32,7 @@
     /* Header Styles */
     header {
       background: rgba(0, 0, 0, 0.6);
-      padding: 3rem 4rem;
+      padding: 2rem 2rem;
       color: white;
       text-align: center;
       border-bottom: 5px solid #ffffff;
@@ -40,12 +40,12 @@
     }
 
     header h1 {
-      font-size: 3.5rem;
+      font-size: 2.5rem;
       margin-bottom: 0.5rem;
     }
 
     header p {
-      font-size: 1.3rem;
+      font-size: 1.1rem;
     }
 
     header nav {
@@ -54,11 +54,11 @@
 
     header nav a,
     header nav button {
-      font-size: 1rem;
-      margin: 0 1rem;
+      font-size: 0.9rem;
+      margin: 0 0.5rem;
       color: white;
       background-color: #4caf50;
-      padding: 10px 20px;
+      padding: 8px 15px;
       border-radius: 5px;
       text-transform: uppercase;
       cursor: pointer;
@@ -72,10 +72,10 @@
 
     /* Chat Container */
     .chat-container {
-      max-width: 800px;
+      max-width: 100%;
       margin: 2rem auto;
       background-color: #ffffff;
-      padding: 2rem;
+      padding: 1rem;
       border-radius: 12px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
     }
@@ -112,15 +112,17 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
     }
 
     .input-container input {
-      width: 80%;
+      width: 75%;
       padding: 12px;
       font-size: 1rem;
       border: 1px solid #ddd;
       border-radius: 8px;
       margin-right: 10px;
+      margin-bottom: 10px;
     }
 
     .input-container button {
@@ -132,6 +134,7 @@
       border-radius: 8px;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      width: 100%;
     }
 
     .input-container button:hover {
@@ -143,13 +146,13 @@
       background-color: #333;
       color: white;
       text-align: center;
-      padding: 1.5rem;
-      margin-top: 3rem;
+      padding: 1rem;
+      margin-top: 2rem;
       box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
     }
 
     footer p {
-      font-size: 1rem;
+      font-size: 0.9rem;
     }
 
     footer a {
@@ -161,6 +164,34 @@
     footer a:hover {
       text-decoration: underline;
     }
+
+    /* Media Queries */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      header p {
+        font-size: 1rem;
+      }
+
+      .chat-box {
+        max-height: 300px;
+      }
+
+      .message {
+        font-size: 0.9rem;
+      }
+
+      .input-container input {
+        width: 65%;
+      }
+
+      .input-container button {
+        width: 30%;
+        margin-left: 10px;
+      }
+    }
   </style>
 
 </head>
@@ -170,7 +201,7 @@
       <h1>SafeMind Chat</h1>
       <p>Connect and talk to a mental wellness expert.</p>
       <nav>
-        <a href="dashboard.html">Back to Dashboard</a>
+        <a href="index.html">Back to Dashboard</a>
         <button id="logoutBtn">Logout</button>
       </nav>
     </header>

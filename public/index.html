@@ -56,6 +56,56 @@
       color: #4caf50;
     }
 
+    /* Hamburger Menu */
+    .hamburger-menu {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 20px;
+      cursor: pointer;
+      z-index: 110;
+    }
+
+    .hamburger-menu div {
+      background: #fff;
+      height: 4px;
+      border-radius: 5px;
+      width: 100%;
+    }
+
+    .menu {
+      position: absolute;
+      top: 0;
+      right: -300px;
+      width: 300px;
+      height: 100vh;
+      background: #333;
+      color: white;
+      transition: all 0.3s ease;
+      padding-top: 50px;
+      box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+
+    .menu.open {
+      right: 0;
+    }
+
+    .menu a {
+      color: white;
+      text-decoration: none;
+      padding: 15px;
+      display: block;
+      font-size: 1.2rem;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .menu a:hover {
+      background: #555;
+    }
+
     .hero {
       font-size: 1.5rem;
       padding: 8rem 2rem;
@@ -119,76 +169,6 @@
       background: #388e3c;
     }
 
-    .features {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-      color: #333;
-      margin: 4rem auto;
-      max-width: 1100px;
-      padding: 4rem 2rem;
-    }
-
-    .features h3 {
-      font-size: 2.5rem;
-      margin-bottom: 2rem;
-      text-align: center;
-    }
-
-    .features ul {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      justify-content: space-around;
-      list-style: none;
-      padding: 0;
-    }
-
-    .features li {
-      background: #f0f0f0;
-      border-radius: 8px;
-      flex: 1 1 200px;
-      font-size: 1.2rem;
-      padding: 2rem;
-      text-align: center;
-      transition: transform 0.3s ease;
-    }
-
-    .features li:hover {
-      background-color: #e0e0e0;
-      transform: translateY(-10px);
-    }
-
-    .features i {
-      color: #4caf50;
-      font-size: 3rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .playstore-btn {
-      align-items: center;
-      background-color: #000;
-      border-radius: 8px;
-      color: #fff;
-      display: inline-flex;
-      font-size: 1rem;
-      font-weight: 500;
-      gap: 0.5rem;
-      padding: 0.8rem 1.2rem;
-      text-decoration: none;
-      transition: background-color 0.3s ease;
-      margin-top: 2rem;
-    }
-
-    .playstore-btn:hover {
-      background-color: #333;
-    }
-
-    .playstore-btn img {
-      height: 24px;
-      width: auto;
-    }
-
     footer {
       background: #333;
       color: white;
@@ -201,11 +181,30 @@
       margin: 0;
     }
 
+    /* Chatbot Floating Button */
+    #chatbot-btn {
+      position: fixed;
+      bottom: 10%;
+      right: 5%;
+      background: #4caf50;
+      border-radius: 50%;
+      color: white;
+      font-size: 2rem;
+      padding: 1rem;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    #chatbot-btn:hover {
+      transform: scale(1.1);
+    }
+
     /* Mobile Responsiveness */
     @media (max-width: 768px) {
       header {
-        align-items: flex-start;
         flex-direction: column;
+        align-items: flex-start;
       }
 
       header h1 {
@@ -213,29 +212,8 @@
         margin-bottom: 0.5rem;
       }
 
-      nav {
-        display: flex;
-        justify-content: flex-end;
-        margin-top: 1rem;
-        width: 100%;
-      }
-
       .hero {
         padding: 6rem 2rem;
-      }
-
-      .features {
-        padding: 3rem;
-      }
-
-      .features ul {
-        align-items: center;
-        flex-direction: column;
-      }
-
-      .features li {
-        flex: 1 1 100%;
-        margin-bottom: 1rem;
       }
 
       .user-segment {
@@ -246,16 +224,15 @@
       .user-segment .cta {
         margin-bottom: 1.5rem;
       }
+
+      footer {
+        margin-top: 3rem;
+      }
     }
 
-    /* Mobile Small (Max-width: 480px) */
     @media (max-width: 480px) {
       .hero h2 {
         font-size: 2.5rem;
-      }
-
-      .hero p {
-        font-size: 1rem;
       }
 
       .cta h3 {
@@ -266,28 +243,26 @@
         font-size: 0.9rem;
         padding: 0.6rem 1.2rem;
       }
-
-      .features h3 {
-        font-size: 2rem;
-      }
-
-      .features li {
-        flex: 1 1 100%;
-        margin-bottom: 1rem;
-      }
     }
   </style>
 </head>
 
 <body>
-
   <header>
     <h1>SafeMind</h1>
-    <nav>
-      <button onclick="window.location.href='login.html'">Login</button>
-      <button onclick="window.location.href='signup.html'">Sign Up</button>
-    </nav>
+    <div class="hamburger-menu" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
   </header>
+
+  <div class="menu" id="menu">
+    <a href="login.html">Login</a>
+    <a href="signup.html">Sign Up</a>
+    <a href="resources.html">Resources</a>
+    <a href="chat.html">Chatbot</a>
+  </div>
 
   <section class="hero">
     <h2>Your Mental Wellness Companion</h2>
@@ -307,26 +282,33 @@
     </div>
   </section>
 
-  <section class="features">
-    <h3>What You Can Do</h3>
-    <ul>
-      <li><i class="fas fa-clipboard-check"></i> Track your mood & habits</li>
-      <li><i class="fas fa-headphones-alt"></i> Access guided meditations</li>
-      <li><i class="fas fa-users"></i> Connect with support tools</li>
-      <li><i class="fas fa-lightbulb"></i> Daily mental health tips</li>
-    </ul>
-    <a href="https://play.google.com/store" target="_blank" class="btn playstore-btn">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" />
-      Download Our App
-    </a>
-  </section>
-
   <footer>
     <p>&copy; 2025 SafeMind. All rights reserved.</p>
   </footer>
 
-  <!-- Font Awesome -->
-  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <!-- Chatbot Floating Button -->
+  <div id="chatbot-btn" onclick="window.location.href='chat.html'">
+    💬
+  </div>
+
+  <script>
+    // Toggle the menu on/off when clicking the hamburger icon
+    function toggleMenu() {
+      const menu = document.getElementById('menu');
+      menu.classList.toggle('open');
+    }
+
+    // Close the menu if the user clicks outside of it
+    document.addEventListener('click', function (event) {
+      const menu = document.getElementById('menu');
+      const hamburgerMenu = document.querySelector('.hamburger-menu');
+      
+      // Check if the click was outside the menu and the hamburger icon
+      if (!menu.contains(event.target) && !hamburgerMenu.contains(event.target)) {
+        menu.classList.remove('open');
+      }
+    });
+  </script>
 
 </body>
 
