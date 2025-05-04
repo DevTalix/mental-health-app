@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat | SafeMind</title>
+
+  <!-- Linking Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(45deg, #6ab7ff, #4caf50);
+      color: #333;
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header Styles */
+    header {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 3rem 4rem;
+      color: white;
+      text-align: center;
+      border-bottom: 5px solid #ffffff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    header h1 {
+      font-size: 3.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      font-size: 1.3rem;
+    }
+
+    header nav {
+      margin-top: 1rem;
+    }
+
+    header nav a,
+    header nav button {
+      font-size: 1rem;
+      margin: 0 1rem;
+      color: white;
+      background-color: #4caf50;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    header nav a:hover,
+    header nav button:hover {
+      background-color: #45a049;
+    }
+
+    /* Chat Container */
+    .chat-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      background-color: #ffffff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .chat-box {
+      max-height: 400px;
+      overflow-y: auto;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+
+    .message {
+      padding: 10px;
+      margin-bottom: 12px;
+      background-color: #f1f1f1;
+      border-radius: 8px;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .message strong {
+      font-weight: bold;
+      color: #4caf50;
+    }
+
+    .message .timestamp {
+      font-size: 0.8rem;
+      color: #777;
+    }
+
+    .input-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .input-container input {
+      width: 80%;
+      padding: 12px;
+      font-size: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-right: 10px;
+    }
+
+    .input-container button {
+      padding: 12px;
+      font-size: 1rem;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .input-container button:hover {
+      background-color: #45a049;
+    }
+
+    /* Footer Styles */
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 3rem;
+      box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    footer p {
+      font-size: 1rem;
+    }
+
+    footer a {
+      color: #4caf50;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>SafeMind Chat</h1>
+      <p>Connect and talk to a mental wellness expert.</p>
+      <nav>
+        <a href="dashboard.html">Back to Dashboard</a>
+        <button id="logoutBtn">Logout</button>
+      </nav>
+    </header>
+
+    <main class="chat-container">
+      <div class="chat-box" id="chat-box">
+        <!-- Messages will be dynamically loaded here -->
+      </div>
+      
+      <div class="input-container">
+        <input type="text" id="messageInput" placeholder="Type your message..." />
+        <button id="sendMessageBtn" class="btn primary">Send</button>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 SafeMind. Empowering mental wellness for everyone.</p>
+    </footer>
+  </div>
+
+  <script>
+    const logoutBtn = document.getElementById('logoutBtn');
+    const sendMessageBtn = document.getElementById('sendMessageBtn');
+    const messageInput = document.getElementById('messageInput');
+    const chatBox = document.getElementById('chat-box');
+
+    // Predefined responses for the chatbot
+    const responses = {
+     "hello": "Hi there! How can I assist you with your mental wellness today?",
+      "how are you": "I'm just a chatbot, but I'm here to help you! How are you feeling?",
+      "bye": "Goodbye! Take care and remember you're not alone.",
+      "anxiety": "Anxiety can feel overwhelming. Try deep breathing exercises or talking to someone you trust. It’s okay to feel this way, and you can always reach out for support.",
+      "stress": "Stress is a natural response, but if it becomes overwhelming, try some relaxation techniques like meditation or yoga. Take breaks when needed!",
+      "depressed": "I'm really sorry you're feeling this way, but please remember, you're not alone. Reaching out to a professional or a loved one can help. You deserve support.",
+      "help": "If you’re struggling, it’s important to talk to someone, whether it’s a friend, family member, or a professional. It's okay to ask for help.",
+      "self-care": "Self-care is crucial! Make sure you're taking time for activities that nourish your body and mind. Exercise, meditation, reading, or even a hobby can help.",
+      "sleep": "Good sleep hygiene is important for mental health. Try a relaxing bedtime routine and avoid screens before bed. Your rest matters!",
+      "hope": "Remember that there is always hope. Take one day at a time, and don’t hesitate to seek help when needed. You're stronger than you think!"
+    };
+
+    // Logout functionality
+    logoutBtn.addEventListener('click', () => {
+      window.location.href = 'index.html'; // Redirect to the login page after logout
+    });
+
+    // Function to send messages and generate bot responses
+    function sendMessage() {
+      const userMessage = messageInput.value.trim();
+      
+      if (userMessage !== '') {
+        displayMessage(userMessage, 'user');
+        const botResponse = getBotResponse(userMessage);
+        setTimeout(() => displayMessage(botResponse, 'bot'), 1000); // Bot responds after 1 second
+        messageInput.value = ''; // Clear input field after sending
+      }
+    }
+
+    // Function to display messages in the chatbox
+    function displayMessage(message, sender) {
+      const messageElement = document.createElement('div');
+      messageElement.classList.add('message');
+      messageElement.classList.add(sender);
+      messageElement.innerHTML = `
+        <strong>${sender === 'user' ? 'You' : 'SafeMind Bot'}:</strong> ${message}
+        <span class="timestamp">${new Date().toLocaleTimeString()}</span>
+      `;
+      chatBox.appendChild(messageElement);
+      chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the latest message
+    }
+
+    // Function to get a response from the bot based on user input
+    function getBotResponse(input) {
+      const normalizedInput = input.toLowerCase().trim();
+      return responses[normalizedInput] || "I'm sorry, I didn't understand that. Can you rephrase?";
+    }
+
+    // Event listener for the send button
+    sendMessageBtn.addEventListener('click', sendMessage);
+
+    // Event listener for "Enter" key to send message
+    messageInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        sendMessage();
+      }
+    });
+  </script>
+</body>
+</html>

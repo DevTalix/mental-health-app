@@ -3,85 +3,299 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SafeMind | Mental Health Companion</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>SafeMind | Home</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: linear-gradient(45deg, #6ab7ff, #4caf50);
+      color: #fff;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    header {
+      align-items: center;
+      background: rgba(0, 0, 0, 0.7);
+      border-bottom: 4px solid #fff;
+      display: flex;
+      justify-content: space-between;
+      padding: 1.5rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header h1 {
+      color: #fff;
+      font-size: 2.5rem;
+      margin: 0;
+    }
+
+    nav button {
+      background: transparent;
+      border: 2px solid white;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-left: 1rem;
+      padding: 0.7rem 1.5rem;
+      transition: background 0.3s ease;
+    }
+
+    nav button:hover {
+      background: white;
+      color: #4caf50;
+    }
+
+    .hero {
+      font-size: 1.5rem;
+      padding: 8rem 2rem;
+      text-align: center;
+    }
+
+    .hero h2 {
+      color: #fff;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      color: #f1f1f1;
+      font-size: 1.2rem;
+      margin: auto;
+      max-width: 800px;
+    }
+
+    .user-segment {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: space-around;
+      margin-top: 4rem;
+    }
+
+    .user-segment .cta {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      color: #333;
+      flex: 1 1 300px;
+      padding: 2rem 2.5rem;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .user-segment .cta:hover {
+      background-color: #f0f0f0;
+      transform: translateY(-10px);
+    }
+
+    .cta h3 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta button {
+      background: #4caf50;
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 0.7rem 1.5rem;
+      transition: background 0.3s ease;
+    }
+
+    .cta button:hover {
+      background: #388e3c;
+    }
+
+    .features {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+      color: #333;
+      margin: 4rem auto;
+      max-width: 1100px;
+      padding: 4rem 2rem;
+    }
+
+    .features h3 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .features ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: space-around;
+      list-style: none;
+      padding: 0;
+    }
+
+    .features li {
+      background: #f0f0f0;
+      border-radius: 8px;
+      flex: 1 1 200px;
+      font-size: 1.2rem;
+      padding: 2rem;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .features li:hover {
+      background-color: #e0e0e0;
+      transform: translateY(-10px);
+    }
+
+    .features i {
+      color: #4caf50;
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .playstore-btn {
+      align-items: center;
+      background-color: #000;
+      border-radius: 8px;
+      color: #fff;
+      display: inline-flex;
+      font-size: 1rem;
+      font-weight: 500;
+      gap: 0.5rem;
+      padding: 0.8rem 1.2rem;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      margin-top: 2rem;
+    }
+
+    .playstore-btn:hover {
+      background-color: #333;
+    }
+
+    .playstore-btn img {
+      height: 24px;
+      width: auto;
+    }
+
+    footer {
+      background: #333;
+      color: white;
+      margin-top: 5rem;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    footer p {
+      margin: 0;
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 600px) {
+      header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      header h1 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      nav {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 1rem;
+        width: 100%;
+      }
+
+      .hero {
+        padding: 6rem 2rem;
+      }
+
+      .features {
+        padding: 3rem;
+      }
+
+      .features ul {
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .features li {
+        flex: 1 1 100%;
+        margin-bottom: 1rem;
+      }
+
+      .user-segment {
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .user-segment .cta {
+        margin-bottom: 1.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>SafeMind</h1>
-      <p>Your Mental Wellness Companion</p>
-      <!-- Navigation -->
-      <nav>
-        <a href="#resourcesPage" id="resourcesLink">Resources</a>
-        <a href="#emergencyContactPage" id="emergencyContactLink">Emergency Contacts</a>
-      </nav>
-    </header>
 
-    <!-- Login Page -->
-    <main id="loginPage" class="card">
-      <h2>Welcome Back</h2>
-      <input type="email" id="email" placeholder="Email" />
-      <input type="password" id="password" placeholder="Password" />
-      <button id="loginBtn" class="btn primary">Login</button>
-      <button id="signupBtn" class="btn secondary">Sign Up</button>
-      <div class="divider">or</div>
-      <button id="guestBtn" class="btn outline">Continue as Guest</button>
-    </main>
+  <header>
+    <h1>SafeMind</h1>
+    <nav>
+      <button onclick="window.location.href='login.html'">Login</button>
+      <button onclick="window.location.href='signup.html'">Sign Up</button>
+    </nav>
+  </header>
 
-    <!-- Chat Page -->
-    <main id="chatPage" class="card" style="display:none">
-      <h2>Talk to SafeMind</h2>
+  <section class="hero">
+    <h2>Your Mental Wellness Companion</h2>
+    <p>SafeMind helps you track your mental health, build healthy habits, and access tools to enhance your well-being — all in one place.</p>
+  </section>
 
-      <!-- Guided Emotion Options -->
-      <div class="emotion-options">
-        <p>How are you feeling today?</p>
-        <div class="option-buttons">
-          <button class="chatOption btn outline" data-feeling="Anxious">Anxious</button>
-          <button class="chatOption btn outline" data-feeling="Stressed">Stressed</button>
-          <button class="chatOption btn outline" data-feeling="Sad">Sad</button>
-        </div>
-      </div>
+  <section class="user-segment">
+    <div class="cta">
+      <h3>For Doctors</h3>
+      <p>Manage your patients' mental health, track their progress, and provide personalized care with SafeMind.</p>
+      <button onclick="window.location.href='login.html'">Go to Doctor's Portal</button>
+    </div>
+    <div class="cta">
+      <h3>For Patients</h3>
+      <p>Track your mood, build healthy habits, and access mental health resources with SafeMind.</p>
+      <button onclick="window.location.href='login.html'">Go to Patient's Portal</button>
+    </div>
+  </section>
 
-      <!-- Dynamic Response Display -->
-      <div id="chatResponse" class="chat-response"></div>
+  <section class="features">
+    <h3>What You Can Do</h3>
+    <ul>
+      <li><i class="fas fa-clipboard-check"></i> Track your mood & habits</li>
+      <li><i class="fas fa-headphones-alt"></i> Access guided meditations</li>
+      <li><i class="fas fa-users"></i> Connect with support tools</li>
+      <li><i class="fas fa-lightbulb"></i> Daily mental health tips</li>
+    </ul>
+    <a href="https://play.google.com/store" target="_blank" class="btn playstore-btn">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" />
+      Download Our App
+    </a>
+  </section>
 
-      <!-- Chatbox to display messages -->
-      <div class="chatbox" id="chatbox">
-        <!-- Chat logs will be appended here dynamically -->
-      </div>
+  <footer>
+    <p>&copy; 2025 SafeMind. All rights reserved.</p>
+  </footer>
 
-      <!-- User Input Field and Send Button -->
-      <input type="text" id="userInput" placeholder="Type your message..." />
-      <button id="sendBtn" class="btn primary">Send</button>
-    </main>
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
-    <!-- Resources Page -->
-    <main id="resourcesPage" class="card" style="display:none">
-      <h2>Resource Library</h2>
-      <div id="resourceList">
-        <!-- Resources will be dynamically fetched and displayed here -->
-      </div>
-    </main>
-
-    <!-- Emergency Contact Page -->
-    <main id="emergencyContactPage" class="card" style="display:none">
-      <h2>Emergency Contacts</h2>
-      <ul id="emergencyContactsList">
-        <!-- Static emergency contact information -->
-        <li><strong>National Helpline:</strong> 1-800-123-4567</li>
-        <li><strong>Emergency Services:</strong> 911</li>
-        <li><strong>Crisis Support:</strong> 1-800-273-8255</li>
-        <li><strong>Local Mental Health Support:</strong> 1-800-555-1234</li>
-      </ul>
-    </main>
-
-    <footer>
-      <p>&copy; 2025 SafeMind. All rights reserved.</p>
-    </footer>
-  </div>
-
-  <script type="module" src="../src/index.js"></script>
 </body>
 </html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login | SafeMind</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Admin Login</h1>
+    </header>
+
+    <!-- Admin Login Form -->
+    <main id="adminLoginPage" class="card">
+      <h2>Admin Login</h2>
+      <input type="email" id="adminEmail" placeholder="Admin Email" />
+      <input type="password" id="adminPassword" placeholder="Admin Password" />
+      <button id="adminLoginBtn" class="btn primary">Login</button>
+      <div id="loginError" style="color: red; display: none;">Invalid credentials. Please try again.</div>
+    </main>
+  </div>
+
+  <script type="module" src="adminLogin.js"></script>
+</body>
+</html>

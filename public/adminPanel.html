@@ -5,23 +5,356 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Panel | SafeMind</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 </head>
+<style>
+      /* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 2rem;
+}
+
+/* Header */
+header {
+  background-color: #3a7bd5;
+  background-image: linear-gradient(to right, #3a7bd5, #00d2ff);
+  color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+header p {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+nav {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav a {
+  color: white;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+#logoutBtn {
+  background-color: #ff4e4e;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+#logoutBtn:hover {
+  background-color: #e03d3d;
+}
+
+/* Admin Panel Main */
+main.admin-section {
+  display: grid;
+  gap: 2rem;
+}
+
+/* Section Titles */
+section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #2b4c7e;
+}
+
+/* Buttons */
+.btn {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn.primary {
+  background-color: #3a7bd5;
+  color: white;
+  margin-right: 1rem;
+}
+
+.btn.primary:hover {
+  background-color: #2f68c2;
+}
+
+.btn.secondary {
+  background-color: #e0e0e0;
+  color: #333;
+  margin-top: 0.5rem;
+}
+
+.btn.secondary:hover {
+  background-color: #d5d5d5;
+}
+
+/* Resource Items */
+.resource-actions {
+  margin-bottom: 1.5rem;
+}
+
+.resource-item,
+.user-item {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.resource-item h4,
+.user-item p {
+  margin-bottom: 0.5rem;
+}
+
+.resource-item iframe {
+  width: 100%;
+  height: 250px;
+  margin-top: 0.5rem;
+  border-radius: 8px;
+}
+
+/* Links */
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2rem 0 1rem;
+  margin-top: 3rem;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+</style>
 <body>
   <div class="container">
     <header>
       <h1>Admin Panel</h1>
+      <p>Manage SafeMind's content and users</p>
+      <nav>
+        <a href="index.html">Back to Dashboard</a>
+        <button id="logoutBtn">Logout</button>
+      </nav>
     </header>
 
-    <!-- Admin Panel for Viewing User Submissions -->
-    <main id="adminPanelPage" class="card" style="display: none;">
-      <h2>Support Requests</h2>
-      <div id="supportRequestsList">
-        <!-- Dynamic list of user submissions will appear here -->
-      </div>
-      <button id="logoutAdminBtn" class="btn outline">Logout</button>
+    <main class="admin-section">
+      <section class="resource-management">
+        <h2>Manage Resources</h2>
+        <div class="resource-actions">
+          <button id="addArticleBtn" class="btn primary">Add Article</button>
+          <button id="addVideoBtn" class="btn primary">Add Video</button>
+          <button id="addSupportServiceBtn" class="btn primary">Add Support Service</button>
+        </div>
+
+        <div class="resource-list">
+          <h3>Articles</h3>
+          <div id="articleList"></div>
+
+          <h3>Videos</h3>
+          <div id="videoList"></div>
+
+          <h3>Support Services</h3>
+          <div id="supportServiceList"></div>
+        </div>
+      </section>
+
+      <section class="user-management">
+        <h2>User Management</h2>
+        <div id="userList">
+          <!-- Dynamically load users here -->
+        </div>
+      </section>
     </main>
+
+    <footer>
+      <p>&copy; 2025 SafeMind. Admin Panel</p>
+    </footer>
   </div>
 
-  <script type="module" src="adminPanel.js"></script>
+  <script type="module">
+    import { auth } from './firebaseConfig.js';
+    import { signOut } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js';
+    import { getDatabase, ref, get, remove } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js';
+
+    const logoutBtn = document.getElementById('logoutBtn');
+    const db = getDatabase();
+
+    const articlesRef = ref(db, 'resources/articles/');
+    const videosRef = ref(db, 'resources/videos/');
+    const supportServicesRef = ref(db, 'resources/supportServices/');
+    const usersRef = ref(db, 'users/');
+
+    // Sign out functionality
+    logoutBtn.addEventListener('click', () => {
+      signOut(auth)
+        .then(() => {
+          window.location.href = 'index.html'; // Redirect to the login page after logout
+        })
+        .catch((error) => {
+          console.error("Error signing out:", error.message);
+        });
+    });
+
+    // Function to load resources
+    function loadResources() {
+      // Load Articles
+      get(articlesRef).then((snapshot) => {
+        const articleList = document.getElementById('articleList');
+        if (snapshot.exists()) {
+          const articles = snapshot.val();
+          articleList.innerHTML = ''; // Clear previous articles
+          Object.keys(articles).forEach((key) => {
+            const article = articles[key];
+            const articleElement = document.createElement('div');
+            articleElement.classList.add('resource-item');
+            articleElement.innerHTML = `
+              <h4>${article.title}</h4>
+              <p>${article.description}</p>
+              <a href="${article.link}" target="_blank">View Article</a>
+              <button class="btn secondary" onclick="deleteResource('articles', '${key}')">Delete</button>
+            `;
+            articleList.appendChild(articleElement);
+          });
+        } else {
+          articleList.innerHTML = '<p>No articles available.</p>';
+        }
+      });
+
+      // Load Videos
+      get(videosRef).then((snapshot) => {
+        const videoList = document.getElementById('videoList');
+        if (snapshot.exists()) {
+          const videos = snapshot.val();
+          videoList.innerHTML = ''; // Clear previous videos
+          Object.keys(videos).forEach((key) => {
+            const video = videos[key];
+            const videoElement = document.createElement('div');
+            videoElement.classList.add('resource-item');
+            videoElement.innerHTML = `
+              <h4>${video.title}</h4>
+              <iframe src="${video.link}" frameborder="0" allowfullscreen></iframe>
+              <button class="btn secondary" onclick="deleteResource('videos', '${key}')">Delete</button>
+            `;
+            videoList.appendChild(videoElement);
+          });
+        } else {
+          videoList.innerHTML = '<p>No videos available.</p>';
+        }
+      });
+
+      // Load Support Services
+      get(supportServicesRef).then((snapshot) => {
+        const supportServiceList = document.getElementById('supportServiceList');
+        if (snapshot.exists()) {
+          const supportServices = snapshot.val();
+          supportServiceList.innerHTML = ''; // Clear previous services
+          Object.keys(supportServices).forEach((key) => {
+            const service = supportServices[key];
+            const serviceElement = document.createElement('div');
+            serviceElement.classList.add('resource-item');
+            serviceElement.innerHTML = `
+              <h4>${service.name}</h4>
+              <p>${service.description}</p>
+              <a href="${service.link}" target="_blank">Contact Service</a>
+              <button class="btn secondary" onclick="deleteResource('supportServices', '${key}')">Delete</button>
+            `;
+            supportServiceList.appendChild(serviceElement);
+          });
+        } else {
+          supportServiceList.innerHTML = '<p>No support services available.</p>';
+        }
+      });
+
+      // Load Users
+      get(usersRef).then((snapshot) => {
+        const userList = document.getElementById('userList');
+        if (snapshot.exists()) {
+          const users = snapshot.val();
+          userList.innerHTML = ''; // Clear previous users
+          Object.keys(users).forEach((key) => {
+            const user = users[key];
+            const userElement = document.createElement('div');
+            userElement.classList.add('user-item');
+            userElement.innerHTML = `
+              <p>${user.name} - ${user.email}</p>
+              <button class="btn secondary" onclick="deleteUser('${key}')">Delete User</button>
+            `;
+            userList.appendChild(userElement);
+          });
+        } else {
+          userList.innerHTML = '<p>No users available.</p>';
+        }
+      });
+    }
+
+    // Delete resource function
+    function deleteResource(resourceType, key) {
+      const resourceRef = ref(db, `resources/${resourceType}/${key}`);
+      remove(resourceRef)
+        .then(() => {
+          alert(`${resourceType.slice(0, -1)} deleted successfully.`);
+          loadResources(); // Reload resources after deletion
+        })
+        .catch((error) => {
+          console.error(`Error deleting ${resourceType}:`, error.message);
+        });
+    }
+
+    // Delete user function
+    function deleteUser(userId) {
+      const userRef = ref(db, `users/${userId}`);
+      remove(userRef)
+        .then(() => {
+          alert('User deleted successfully.');
+          loadResources(); // Reload user list after deletion
+        })
+        .catch((error) => {
+          console.error('Error deleting user:', error.message);
+        });
+    }
+
+    // Initialize admin panel
+    loadResources();
+  </script>
 </body>
 </html>

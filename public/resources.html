@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resources | SafeMind</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    header h1 {
+      font-size: 36px;
+      color: #007bff;
+    }
+
+    header p {
+      font-size: 18px;
+      color: #666;
+    }
+
+    nav {
+      text-align: right;
+      margin-top: 20px;
+    }
+
+    nav a {
+      color: #007bff;
+      text-decoration: none;
+      font-size: 16px;
+      margin-right: 20px;
+    }
+
+    nav button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    nav button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Search Section */
+    .search-section {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .search-section input {
+      padding: 10px;
+      font-size: 16px;
+      width: 80%;
+      max-width: 600px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin: 0 auto;
+      display: block;
+    }
+
+    /* Resource Categories */
+    .resource-category {
+      margin-bottom: 40px;
+    }
+
+    .resource-category h2 {
+      font-size: 28px;
+      color: #333;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    .resource-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .resource-item {
+      background-color: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .resource-item:hover {
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .resource-item h3 {
+      font-size: 20px;
+      color: #007bff;
+      margin-bottom: 10px;
+    }
+
+    .resource-item a {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .resource-item a:hover {
+      text-decoration: underline;
+    }
+
+    .resource-item p {
+      font-size: 16px;
+      color: #555;
+    }
+
+    .resource-item iframe {
+      width: 100%;
+      height: 200px;
+      border-radius: 8px;
+    }
+
+    .btn.primary {
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      text-align: center;
+      display: inline-block;
+    }
+
+    .btn.primary:hover {
+      background-color: #218838;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 14px;
+      color: #888;
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      .resource-list {
+        grid-template-columns: 1fr;
+      }
+
+      .search-section input {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>SafeMind Resources</h1>
+      <p>Explore articles, videos, and other resources to help improve your mental wellness.</p>
+      <nav>
+        <a href="patient-dashboard.html">Back to Dashboard</a>
+        <button id="logoutBtn">Logout</button>
+      </nav>
+    </header>
+
+    <main class="resources-section">
+      <section class="search-section">
+        <input type="text" id="searchInput" placeholder="Search resources..." onkeyup="filterResources()">
+      </section>
+
+      <section class="resource-category">
+        <h2>Articles</h2>
+        <div class="resource-list" id="articleList">
+          <!-- Articles will be dynamically loaded here -->
+        </div>
+      </section>
+
+      <section class="resource-category">
+        <h2>Videos</h2>
+        <div class="resource-list" id="videoList">
+          <!-- Videos will be dynamically loaded here -->
+        </div>
+      </section>
+
+      <section class="resource-category">
+        <h2>Support Services</h2>
+        <div class="resource-list" id="supportList">
+          <!-- Support services will be dynamically loaded here -->
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 SafeMind. Empowering mental wellness for everyone.</p>
+    </footer>
+  </div>
+
+  <script type="module">
+    // Firebase imports for reading resource data (if stored in Firebase)
+    import { auth } from './firebaseConfig.js';
+    import { signOut } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js';
+    import { getDatabase, ref, get } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js';
+
+    const logoutBtn = document.getElementById('logoutBtn');
+    const searchInput = document.getElementById('searchInput');
+
+    const db = getDatabase();
+    const articlesRef = ref(db, 'resources/articles/');
+    const videosRef = ref(db, 'resources/videos/');
+    const supportServicesRef = ref(db, 'resources/supportServices/');
+
+    // Sign out functionality
+    logoutBtn.addEventListener('click', () => {
+      signOut(auth)
+        .then(() => {
+          window.location.href = 'index.html'; // Redirect to the login page after logout
+        })
+        .catch((error) => {
+          console.error("Error signing out:", error.message);
+        });
+    });
+
+    // Function to load resources dynamically
+    function loadResources() {
+      // Load Articles
+      get(articlesRef).then((snapshot) => {
+        const articleList = document.getElementById('articleList');
+        if (snapshot.exists()) {
+          const articles = snapshot.val();
+          articleList.innerHTML = ''; // Clear previous articles
+          Object.values(articles).forEach((article) => {
+            const articleElement = document.createElement('div');
+            articleElement.classList.add('resource-item');
+            articleElement.innerHTML = `
+              <h3><a href="${article.link}" target="_blank">${article.title}</a></h3>
+              <p>${article.description}</p>
+            `;
+            articleList.appendChild(articleElement);
+          });
+        } else {
+          articleList.innerHTML = '<p>No articles available at the moment.</p>';
+        }
+      });
+
+      // Load Videos
+      get(videosRef).then((snapshot) => {
+        const videoList = document.getElementById('videoList');
+        if (snapshot.exists()) {
+          const videos = snapshot.val();
+          videoList.innerHTML = ''; // Clear previous videos
+          Object.values(videos).forEach((video) => {
+            const videoElement = document.createElement('div');
+            videoElement.classList.add('resource-item');
+            videoElement.innerHTML = `
+              <h3><a href="${video.link}" target="_blank">${video.title}</a></h3>
+              <iframe src="${video.link}" frameborder="0" allowfullscreen></iframe>
+            `;
+            videoList.appendChild(videoElement);
+          });
+        } else {
+          videoList.innerHTML = '<p>No videos available at the moment.</p>';
+        }
+      });
+
+      // Load Support Services
+      get(supportServicesRef).then((snapshot) => {
+        const supportList = document.getElementById('supportList');
+        if (snapshot.exists()) {
+          const supportServices = snapshot.val();
+          supportList.innerHTML = ''; // Clear previous support services
+          Object.values(supportServices).forEach((service) => {
+            const serviceElement = document.createElement('div');
+            serviceElement.classList.add('resource-item');
+            serviceElement.innerHTML = `
+              <h3>${service.name}</h3>
+              <p>${service.description}</p>
+              <a href="${service.link}" target="_blank" class="btn primary">Contact Support</a>
+            `;
+            supportList.appendChild(serviceElement);
+          });
+        } else {
+          supportList.innerHTML = '<p>No support services available at the moment.</p>';
+        }
+      });
+    }
+
+    // Function to filter resources by search term
+    function filterResources() {
+      const searchTerm = searchInput.value.toLowerCase();
+      const resourceItems = document.querySelectorAll('.resource-item');
+
+      resourceItems.forEach(item => {
+        const title = item.querySelector('h3').textContent.toLowerCase();
+        if (title.includes(searchTerm)) {
+          item.style.display = '';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    // Load resources on page load
+    window.onload = loadResources;
+  </script>
+</body>
+</html>
