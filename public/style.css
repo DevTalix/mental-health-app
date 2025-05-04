@@ -1,0 +1,264 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(120deg, #6a11cb, #2575fc);
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 420px;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+  }
+  
+  header p {
+    font-weight: 300;
+    margin-bottom: 30px;
+  }
+  
+  .card {
+    background-color: #ffffff15;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+  }
+  
+  input {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  
+  input:focus {
+    outline: 2px solid #fff;
+  }
+  
+  .btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+  
+  .primary {
+    background-color: #fff;
+    color: #2575fc;
+    font-weight: bold;
+  }
+  
+  .secondary {
+    background-color: #2575fc;
+    color: #fff;
+  }
+  
+  .outline {
+    background-color: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+  }
+  
+  .btn:hover {
+    opacity: 0.9;
+  }
+  
+  .divider {
+    margin: 15px 0;
+    font-size: 0.9rem;
+    opacity: 0.7;
+  }
+  
+  .chatbox {
+    height: 200px;
+    overflow-y: auto;
+    background-color: #ffffff10;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 15px;
+  }
+  
+  footer {
+    margin-top: 30px;
+    font-size: 0.8rem;
+    opacity: 0.7;
+  }
+/* Emotion Options Section */
+.emotion-options {
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .emotion-options p {
+    font-size: 1.2rem;
+    color: #333;
+    font-weight: 500;
+  }
+  
+  .option-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .option-buttons .chatOption {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .option-buttons .chatOption:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+  }
+  
+  /* Chat Response Section */
+  .chat-response {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    font-size: 1rem;
+    text-align: left;
+    color: #555;
+  }
+  
+  .chat-response p {
+    margin: 0;
+    padding: 5px;
+    font-weight: 500;
+  }
+  
+  /* Overall Chatbox Styling */
+  #chatbox {
+    margin-top: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+  }
+  
+  #userInput {
+    width: 80%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  #sendBtn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  #sendBtn:hover {
+    background-color: #0056b3;
+  }
+  /* style.css */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .card {
+    background-color: white;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  header {
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  button {
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button.primary {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+  }
+  
+  button.outline {
+    background-color: transparent;
+    border: 1px solid #ccc;
+  }
+  
+  button:hover {
+    opacity: 0.8;
+  }
+  
+  #supportRequestsList {
+    margin-top: 20px;
+  }
+  
+  .support-request {
+    padding: 15px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+  }
+  
+  #loginError {
+    color: red;
+    display: none;
+  }
+  
+    

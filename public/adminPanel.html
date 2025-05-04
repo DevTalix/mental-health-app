@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel | SafeMind</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Admin Panel</h1>
+    </header>
+
+    <!-- Admin Panel for Viewing User Submissions -->
+    <main id="adminPanelPage" class="card" style="display: none;">
+      <h2>Support Requests</h2>
+      <div id="supportRequestsList">
+        <!-- Dynamic list of user submissions will appear here -->
+      </div>
+      <button id="logoutAdminBtn" class="btn outline">Logout</button>
+    </main>
+  </div>
+
+  <script type="module" src="adminPanel.js"></script>
+</body>
+</html>
