@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -201,7 +202,7 @@
     }
 
     /* Mobile Responsiveness */
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       header {
         align-items: flex-start;
         flex-direction: column;
@@ -246,8 +247,38 @@
         margin-bottom: 1.5rem;
       }
     }
+
+    /* Mobile Small (Max-width: 480px) */
+    @media (max-width: 480px) {
+      .hero h2 {
+        font-size: 2.5rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .cta h3 {
+        font-size: 1.5rem;
+      }
+
+      .cta button {
+        font-size: 0.9rem;
+        padding: 0.6rem 1.2rem;
+      }
+
+      .features h3 {
+        font-size: 2rem;
+      }
+
+      .features li {
+        flex: 1 1 100%;
+        margin-bottom: 1rem;
+      }
+    }
   </style>
 </head>
+
 <body>
 
   <header>
@@ -298,4 +329,5 @@
   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
 </body>
+
 </html>

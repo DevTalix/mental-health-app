@@ -160,6 +160,91 @@
             text-align: center;
             font-size: 1rem;
         }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr; /* Switch to single-column layout */
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem; /* Adjust header size */
+            }
+
+            .sidebar h2 {
+                font-size: 1.25rem;
+            }
+
+            .sidebar li {
+                padding: 0.5rem;
+                font-size: 0.9rem; /* Smaller buttons for mobile */
+            }
+
+            .content h2 {
+                font-size: 1.5rem;
+            }
+
+            .card h3 {
+                font-size: 1.25rem;
+            }
+
+            .btn {
+                font-size: 1rem;
+            }
+
+            .profile-details p {
+                font-size: 1rem;
+            }
+
+            .logout-btn {
+                font-size: 1rem;
+                padding: 0.8rem 1.5rem;
+            }
+        }
+
+        /* Adjustments for very small screens (e.g., Techno Pop 5) */
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.75rem;
+            }
+
+            .sidebar h2 {
+                font-size: 1.1rem;
+            }
+
+            .sidebar li {
+                font-size: 0.85rem;
+                padding: 0.4rem;
+            }
+
+            .content h2 {
+                font-size: 1.25rem;
+            }
+
+            .card h3 {
+                font-size: 1.1rem;
+            }
+
+            .btn {
+                font-size: 0.95rem;
+                padding: 0.8rem;
+            }
+
+            .profile-img {
+                width: 100px;
+                height: 100px;
+            }
+
+            .profile-details p {
+                font-size: 0.95rem;
+            }
+
+            .footer {
+                font-size: 0.9rem;
+                padding: 0.8rem;
+            }
+        }
     </style>
 </head>
 
@@ -222,15 +307,7 @@
                 <h3>Messaging</h3>
                 <p>You have 3 new messages from your healthcare provider.</p>
                 <button class="btn" onclick="viewMessages()">View Messages</button>
-                <button class="btn" onclick="emergencyMessage()">Emergency Contact (WhatsApp)</button>
-            </div>
-
-            <div class="card">
-                <h3>Billing & Payments</h3>
-                <button class="btn" onclick="viewInvoiceHistory()">View Invoice History</button>
-                <button class="btn" onclick="payInvoice()">Pay Invoice</button>
-                <button class="btn" onclick="mobileMoneyPayment()">Pay via Mobile Money</button>
-                <button class="btn" onclick="visaCardPayment()">Pay via Visa Card</button>
+                <button class="btn" onclick="sendMessage()">Send Message</button>
             </div>
 
             <button class="logout-btn" onclick="logout()">Logout</button>
@@ -242,69 +319,49 @@
     </div>
 
     <script>
-        function updateProfilePic() {
-            const newPicUrl = prompt("Enter new profile picture URL:");
-            if (newPicUrl) {
-                document.querySelector('.profile-img').src = newPicUrl;
-            }
-        }
-
+        // Placeholder functions for interaction
         function viewAppointments() {
-            alert("Viewing all appointments...");
-        }
-
-        function scheduleAppointment() {
-            alert("Scheduling a new appointment...");
+            alert("Viewing appointments");
         }
 
         function viewMedicalHistory() {
-            alert("Viewing your medical history...");
-        }
-
-        function viewLabResults() {
-            alert("Viewing lab results...");
-        }
-
-        function viewPrescriptions() {
-            alert("Viewing prescriptions...");
+            alert("Viewing medical history");
         }
 
         function viewMessages() {
-            alert("Viewing your messages...");
-        }
-
-        function emergencyMessage() {
-            const phoneNumber = "+1234567890"; // Change to your emergency number
-            const message = "Emergency: Please assist urgently!";
-            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, "_blank");
-        }
-
-        function viewInvoiceHistory() {
-            alert("Viewing invoice history...");
+            alert("Viewing messages");
         }
 
         function payInvoice() {
-            alert("Paying invoice...");
-        }
-
-        function mobileMoneyPayment() {
-            alert("Redirecting to Mobile Money payment gateway...");
-            window.open("https://www.mobilemoneylink.com", "_blank");
-        }
-
-        function visaCardPayment() {
-            alert("Redirecting to Visa Card payment gateway...");
-            window.open("https://www.visapaymentlink.com", "_blank");
+            alert("Paying invoice");
         }
 
         function changeSettings() {
-            alert("Changing account settings...");
+            alert("Changing settings");
         }
 
-        // Logout functionality
+        function updateProfilePic() {
+            alert("Updating profile picture");
+        }
+
+        function scheduleAppointment() {
+            alert("Scheduling a new appointment");
+        }
+
+        function viewLabResults() {
+            alert("Viewing lab results");
+        }
+
+        function viewPrescriptions() {
+            alert("Viewing prescriptions");
+        }
+
+        function sendMessage() {
+            alert("Sending message");
+        }
+
         function logout() {
-            window.location.href = "login.html"; // Redirects to the login page
+            alert("Logging out");
         }
     </script>
 
