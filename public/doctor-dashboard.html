@@ -74,7 +74,6 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      margin-top: 0.5rem;
     }
 
     .doctor-profile img {
@@ -126,6 +125,9 @@
       border-radius: 6px;
       margin-top: 0.5rem;
       width: 100%;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
     }
 
     ul.messages, ul {
@@ -200,89 +202,91 @@
 </head>
 <body>
 
-    <div class="main">
-      <div class="header">
-        <h1>Doctor Dashboard</h1>
-        <div class="search-bar">
-          <input type="text" placeholder="Search...">
-        </div>
+  <div class="main">
+    <div class="header">
+      <h1>Doctor Dashboard</h1>
+      <div class="search-bar">
+        <input type="text" placeholder="Search...">
+      </div>
+      <div style="display: flex; align-items: center; gap: 1rem;">
         <div class="doctor-profile">
           <img id="profile-img" src="https://via.placeholder.com/80" alt="Profile Picture">
           <span id="doctor-name">Dr. Grace Mwine</span>
         </div>
+        <a href="login.html" class="btn" onclick="logout()">Logout</a>
       </div>
+    </div>
 
-      <div class="section">
-        <h2>Today's Appointments</h2>
-        <div class="card-grid">
-          <div class="card">
-            <h3>John Doe</h3>
-            <p>Time: 10:00 AM</p>
-            <p>Issue: Anxiety</p>
-            <button class="btn">View Details</button>
-          </div>
-          <div class="card">
-            <h3>Mary Smith</h3>
-            <p>Time: 11:30 AM</p>
-            <p>Issue: Routine Check</p>
-            <button class="btn">View Details</button>
-          </div>
+    <div class="section">
+      <h2>Today's Appointments</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>John Doe</h3>
+          <p>Time: 10:00 AM</p>
+          <p>Issue: Anxiety</p>
+          <button class="btn">View Details</button>
+        </div>
+        <div class="card">
+          <h3>Mary Smith</h3>
+          <p>Time: 11:30 AM</p>
+          <p>Issue: Routine Check</p>
+          <button class="btn">View Details</button>
         </div>
       </div>
+    </div>
 
-      <div class="section">
-        <h2>Patient Records</h2>
-        <div class="card-grid">
-          <div class="card">
-            <h3>James Matovu</h3>
-            <p>Age: 29</p>
-            <p>Diagnosis: Depression</p>
-            <p>Last Visit: April 20, 2025</p>
-            <button class="btn">View Record</button>
-          </div>
-          <div class="card">
-            <h3>Sandra Nakitende</h3>
-            <p>Age: 34</p>
-            <p>Diagnosis: PTSD</p>
-            <p>Last Visit: April 18, 2025</p>
-            <button class="btn">View Record</button>
-          </div>
-          <div class="card">
-            <h3>Emmanuel Kato</h3>
-            <p>Age: 42</p>
-            <p>Diagnosis: Insomnia</p>
-            <p>Last Visit: April 28, 2025</p>
-            <button class="btn">View Record</button>
-          </div>
+    <div class="section">
+      <h2>Patient Records</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>James Matovu</h3>
+          <p>Age: 29</p>
+          <p>Diagnosis: Depression</p>
+          <p>Last Visit: April 20, 2025</p>
+          <button class="btn">View Record</button>
+        </div>
+        <div class="card">
+          <h3>Sandra Nakitende</h3>
+          <p>Age: 34</p>
+          <p>Diagnosis: PTSD</p>
+          <p>Last Visit: April 18, 2025</p>
+          <button class="btn">View Record</button>
+        </div>
+        <div class="card">
+          <h3>Emmanuel Kato</h3>
+          <p>Age: 42</p>
+          <p>Diagnosis: Insomnia</p>
+          <p>Last Visit: April 28, 2025</p>
+          <button class="btn">View Record</button>
         </div>
       </div>
+    </div>
 
-      <div class="section">
-        <h2>Messages</h2>
-        <ul class="messages">
-          <li>
-            <p><span class="msg-sender">Sandra Nakitende</span> – <span class="msg-time">10 mins ago</span></p>
-            <p>Doctor, I have a question about the medication you prescribed last week.</p>
-          </li>
-          <li>
-            <p><span class="msg-sender">John Doe</span> – <span class="msg-time">1 hour ago</span></p>
-            <p>Can I reschedule my appointment to tomorrow afternoon?</p>
-          </li>
-          <li>
-            <p><span class="msg-sender">Emmanuel Kato</span> – <span class="msg-time">Yesterday</span></p>
-            <p>Thank you for the session. I’m feeling a bit better already.</p>
-          </li>
-        </ul>
-      </div>
+    <div class="section">
+      <h2>Messages</h2>
+      <ul class="messages">
+        <li>
+          <p><span class="msg-sender">Sandra Nakitende</span> – <span class="msg-time">10 mins ago</span></p>
+          <p>Doctor, I have a question about the medication you prescribed last week.</p>
+        </li>
+        <li>
+          <p><span class="msg-sender">John Doe</span> – <span class="msg-time">1 hour ago</span></p>
+          <p>Can I reschedule my appointment to tomorrow afternoon?</p>
+        </li>
+        <li>
+          <p><span class="msg-sender">Emmanuel Kato</span> – <span class="msg-time">Yesterday</span></p>
+          <p>Thank you for the session. I’m feeling a bit better already.</p>
+        </li>
+      </ul>
+    </div>
 
-      <div class="section">
-        <h2>Notifications</h2>
-        <ul>
-          <li>✔️ You have 3 unread messages.</li>
-          <li>✔️ New patient record added: Alice Kamoga</li>
-          <li>✔️ Weekly summary report ready for review.</li>
-        </ul>
-      </div>
+    <div class="section">
+      <h2>Notifications</h2>
+      <ul>
+        <li>✔️ You have 3 unread messages.</li>
+        <li>✔️ New patient record added: Alice Kamoga</li>
+        <li>✔️ Weekly summary report ready for review.</li>
+      </ul>
     </div>
   </div>
 
@@ -296,7 +300,6 @@
 
     function logout() {
       localStorage.clear();
-      alert("You have been logged out.");
     }
   </script>
 </body>

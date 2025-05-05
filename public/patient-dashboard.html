@@ -2,369 +2,290 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient Dashboard | SafeMind</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-    <style>
-        /* General Body and Layout Styles */
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #f5f5f5;
-            color: #333;
-            overflow-x: hidden;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Patient Dashboard | SafeMind</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+      color: #333;
+      overflow-x: hidden;
+    }
 
-        .container {
-            display: grid;
-            grid-template-columns: 1fr 3fr;
-            grid-gap: 2rem;
-            padding: 2rem;
-        }
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      gap: 2rem;
+      padding: 2rem;
+    }
 
-        .header {
-            background: #0066cc;
-            padding: 1.5rem;
-            text-align: center;
-            color: white;
-        }
+    .header {
+      background: #0066cc;
+      padding: 1.5rem;
+      text-align: center;
+      color: white;
+    }
 
-        .header h1 {
-            font-size: 2.5rem;
-            margin: 0;
-        }
+    .header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
 
-        /* Sidebar Section */
-        .sidebar {
-            background-color: #ffffff;
-            padding: 1.5rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
+    .sidebar {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
-        .sidebar h2 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            text-align: center;
-            color: #333;
-        }
+    .sidebar h2 {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
 
-        .sidebar ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
 
-        .sidebar li {
-            padding: 0.75rem;
-            margin-bottom: 0.5rem;
-            background-color: #0066cc;
-            color: white;
-            text-align: center;
-            border-radius: 6px;
-            transition: background-color 0.3s;
-            cursor: pointer;
-        }
+    .sidebar li {
+      margin-bottom: 0.5rem;
+    }
 
-        .sidebar li:hover {
-            background-color: #004c99;
-        }
+    .sidebar a {
+      display: block;
+      padding: 0.75rem;
+      background-color: #0066cc;
+      color: white;
+      text-align: center;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
 
-        /* Content Section */
-        .content {
-            background-color: #ffffff;
-            padding: 2rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
+    .sidebar a:hover {
+      background-color: #004c99;
+    }
 
-        .content h2 {
-            font-size: 1.75rem;
-            margin-bottom: 1.5rem;
-            color: #333;
-        }
+    .content {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
 
-        .card {
-            background: #f9f9f9;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-        }
+    .content h2 {
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+    }
 
-        .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #333;
-        }
+    .card {
+      background: #f9f9f9;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
 
-        .btn {
-            padding: 1rem;
-            background-color: #0066cc;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            width: 100%;
-            margin-bottom: 1rem;
-            transition: all 0.3s ease;
-        }
+    .card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
 
-        .btn:hover {
-            background-color: #004c99;
-            transform: scale(1.05);
-        }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      background-color: #0066cc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
 
-        .profile-img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 4px solid #0066cc;
-            margin: 0 auto;
-        }
+    .btn:hover {
+      background-color: #004c99;
+      transform: scale(1.05);
+    }
 
-        .profile-details {
-            text-align: center;
-            margin-top: 1.5rem;
-        }
+    .profile-img {
+      display: block;
+      margin: 0 auto;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 4px solid #0066cc;
+    }
 
-        .profile-details p {
-            font-size: 1.1rem;
-            color: #666;
-        }
+    .profile-details {
+      text-align: center;
+      margin-top: 1.5rem;
+    }
 
-        .logout-btn {
-            padding: 1rem 2rem;
-            background-color: #ff0033;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            width: 100%;
-            margin-top: 1rem;
-            text-align: center;
-        }
+    .profile-details p {
+      font-size: 1.1rem;
+      color: #666;
+    }
 
-        .logout-btn:hover {
-            background-color: #cc0033;
-        }
+    .logout-btn {
+      padding: 1rem 2rem;
+      background-color: #ff0033;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      width: 100%;
+      margin-top: 1rem;
+    }
 
-        .footer {
-            padding: 1rem;
-            background-color: #0066cc;
-            color: white;
-            text-align: center;
-            font-size: 1rem;
-        }
+    .logout-btn:hover {
+      background-color: #cc0033;
+    }
 
-        /* Responsive adjustments for smaller screens */
-        @media (max-width: 768px) {
-            .container {
-                grid-template-columns: 1fr; /* Switch to single-column layout */
-                padding: 1rem;
-            }
+    .footer {
+      padding: 1rem;
+      background-color: #0066cc;
+      color: white;
+      text-align: center;
+      font-size: 1rem;
+    }
 
-            .header h1 {
-                font-size: 2rem; /* Adjust header size */
-            }
+    .profile-form {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      display: none;
+    }
 
-            .sidebar h2 {
-                font-size: 1.25rem;
-            }
+    .profile-form input {
+      width: 100%;
+      padding: 1rem;
+      margin: 0.5rem 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
 
-            .sidebar li {
-                padding: 0.5rem;
-                font-size: 0.9rem; /* Smaller buttons for mobile */
-            }
+    .profile-form button {
+      padding: 1rem;
+      width: 100%;
+      background-color: #0066cc;
+      color: white;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
 
-            .content h2 {
-                font-size: 1.5rem;
-            }
+    .profile-form button:hover {
+      background-color: #004c99;
+    }
 
-            .card h3 {
-                font-size: 1.25rem;
-            }
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
 
-            .btn {
-                font-size: 1rem;
-            }
+      .header h1 {
+        font-size: 2rem;
+      }
 
-            .profile-details p {
-                font-size: 1rem;
-            }
+      .sidebar h2 {
+        font-size: 1.25rem;
+      }
 
-            .logout-btn {
-                font-size: 1rem;
-                padding: 0.8rem 1.5rem;
-            }
-        }
+      .sidebar a {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+      }
 
-        /* Adjustments for very small screens (e.g., Techno Pop 5) */
-        @media (max-width: 480px) {
-            .header h1 {
-                font-size: 1.75rem;
-            }
+      .card h3 {
+        font-size: 1.25rem;
+      }
 
-            .sidebar h2 {
-                font-size: 1.1rem;
-            }
-
-            .sidebar li {
-                font-size: 0.85rem;
-                padding: 0.4rem;
-            }
-
-            .content h2 {
-                font-size: 1.25rem;
-            }
-
-            .card h3 {
-                font-size: 1.1rem;
-            }
-
-            .btn {
-                font-size: 0.95rem;
-                padding: 0.8rem;
-            }
-
-            .profile-img {
-                width: 100px;
-                height: 100px;
-            }
-
-            .profile-details p {
-                font-size: 0.95rem;
-            }
-
-            .footer {
-                font-size: 0.9rem;
-                padding: 0.8rem;
-            }
-        }
-    </style>
+      .profile-details p {
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <div class="header">
+    <h1>Welcome to SafeMind Patient Dashboard</h1>
+  </div>
 
-    <div class="header">
-        <h1>Welcome to SafeMind Patient Dashboard</h1>
+  <div class="container">
+    <div class="sidebar">
+      <h2>Quick Links</h2>
+      <ul>
+        <li><a href="appointments.html">Appointments</a></li>
+        <li><a href="medical-history.html">Medical History</a></li>
+        <li><a href="messages.html">Messages</a></li>
+        <li><a href="billing.html">Billing</a></li>
+        <li><a href="settings.html">Settings</a></li>
+      </ul>
     </div>
 
-    <div class="container">
-        <!-- Sidebar with Navigation Links -->
-        <div class="sidebar">
-            <h2>Quick Links</h2>
-            <ul>
-                <li onclick="viewAppointments()">Appointments</li>
-                <li onclick="viewMedicalHistory()">Medical History</li>
-                <li onclick="viewMessages()">Messages</li>
-                <li onclick="payInvoice()">Billing</li>
-                <li onclick="changeSettings()">Settings</li>
-            </ul>
+    <div class="content">
+      <div class="card profile">
+        <h3>Profile Overview</h3>
+        <img id="profileImg" src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-img" />
+        <div class="profile-details">
+          <p id="profileName">Name: John Doe</p>
+          <p id="profileEmail">Email: john.doe@example.com</p>
+          <p id="profilePhone">Phone: 123-456-7890</p>
         </div>
+        <button class="btn" id="updateBtn" onclick="toggleProfileForm()">Update Profile</button>
+      </div>
 
-        <!-- Main Content Area -->
-        <div class="content">
-            <div class="card profile">
-                <h3>Profile Overview</h3>
-                <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-img">
-                <div class="profile-details">
-                    <p>Name: John Doe</p>
-                    <p>Age: 30</p>
-                    <p>Email: john.doe@example.com</p>
-                </div>
-                <button class="btn" onclick="updateProfilePic()">Update Profile Picture</button>
-            </div>
+      <div class="profile-form" id="profileForm">
+        <h3>Update Your Profile</h3>
+        <input type="text" id="nameInput" placeholder="Full Name" />
+        <input type="email" id="emailInput" placeholder="Email Address" />
+        <input type="tel" id="phoneInput" placeholder="Phone Number" />
+        <input type="file" id="imgInput" accept="image/*" />
+        <button onclick="updateProfile()">Save Changes</button>
+      </div>
 
-            <div class="card">
-                <h3>Upcoming Appointments</h3>
-                <ul>
-                    <li>
-                        <strong>Dr. Smith</strong><br>
-                        May 10, 2025 - 10:00 AM
-                    </li>
-                    <li>
-                        <strong>Dr. Lee</strong><br>
-                        May 12, 2025 - 02:00 PM
-                    </li>
-                </ul>
-                <button class="btn" onclick="viewAppointments()">View All Appointments</button>
-                <button class="btn" onclick="scheduleAppointment()">Schedule New Appointment</button>
-            </div>
+      <div class="card">
+        <h3>Upcoming Appointments</h3>
+        <ul>
+          <li><strong>Dr. Smith</strong><br>May 10, 2025 - 10:00 AM</li>
+          <li><strong>Dr. Lee</strong><br>May 12, 2025 - 02:00 PM</li>
+        </ul>
+        <a href="appointments.html" class="btn">View All Appointments</a>
+        <button class="btn" onclick="alert('Schedule feature coming soon')">Schedule New Appointment</button>
+      </div>
 
-            <div class="card">
-                <h3>Health Records</h3>
-                <button class="btn" onclick="viewMedicalHistory()">View Medical History</button>
-                <button class="btn" onclick="viewLabResults()">View Lab Results</button>
-                <button class="btn" onclick="viewPrescriptions()">View Prescriptions</button>
-            </div>
+      <div class="card">
+        <h3>Health Records</h3>
+        <a href="medical-history.html" class="btn">View Medical History</a>
+        <button class="btn" onclick="alert('Lab results feature coming soon')">View Lab Results</button>
+        <button class="btn" onclick="alert('Prescriptions feature coming soon')">View Prescriptions</button>
+      </div>
 
-            <div class="card">
-                <h3>Messaging</h3>
-                <p>You have 3 new messages from your healthcare provider.</p>
-                <button class="btn" onclick="viewMessages()">View Messages</button>
-                <button class="btn" onclick="sendMessage()">Send Message</button>
-            </div>
+      <div class="card">
+        <h3>Messaging</h3>
+        <p>You have 3 new messages from your healthcare provider.</p>
+        <a href="messages.html" class="btn">View Messages</a>
+        <button class="btn" onclick="alert('Send message feature coming soon')">Send Message</button>
+      </div>
 
-            <button class="logout-btn" onclick="logout()">Logout</button>
-        </div>
+      <a href="login.html" class="logout-btn" onclick="logout()">Logout</a>
+
     </div>
+  </div>
 
-    <div class="footer">
-        <p>&copy; 2025 SafeMind. All Rights Reserved.</p>
-    </div>
-
-    <script>
-        // Placeholder functions for interaction
-        function viewAppointments() {
-            alert("Viewing appointments");
-        }
-
-        function viewMedicalHistory() {
-            alert("Viewing medical history");
-        }
-
-        function viewMessages() {
-            alert("Viewing messages");
-        }
-
-        function payInvoice() {
-            alert("Paying invoice");
-        }
-
-        function changeSettings() {
-            alert("Changing settings");
-        }
-
-        function updateProfilePic() {
-            alert("Updating profile picture");
-        }
-
-        function scheduleAppointment() {
-            alert("Scheduling a new appointment");
-        }
-
-        function viewLabResults() {
-            alert("Viewing lab results");
-        }
-
-        function viewPrescriptions() {
-            alert("Viewing prescriptions");
-        }
-
-        function sendMessage() {
-            alert("Sending message");
-        }
-
-        function logout() {
-            alert("Logging out");
-        }
-    </script>
-
-</body>
-
-</html>
+  <div class="footer
