@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>SafeMind | Home</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
@@ -21,8 +21,11 @@
       font-family: 'Poppins', sans-serif;
       transition: background 0.3s ease, color 0.3s ease;
       width: 100%;
-      max-width: 100vw;
-      overflow-x: hidden; /* Prevent horizontal scrolling */
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      -webkit-text-size-adjust: 100%;
     }
 
     body.dark-mode {
@@ -42,7 +45,7 @@
       border-bottom: 4px solid #fff;
       display: flex;
       justify-content: space-between;
-      padding: 1.5rem 2rem;
+      padding: 1rem;
       position: sticky;
       top: 0;
       z-index: 100;
@@ -51,39 +54,44 @@
 
     header h1 {
       color: #fff;
-      font-size: 2.5rem;
+      font-size: 1.5rem;
       margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .hamburger-menu {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      width: 30px;
-      height: 20px;
+      width: 24px;
+      height: 18px;
       cursor: pointer;
       z-index: 110;
     }
 
     .hamburger-menu div {
       background: #fff;
-      height: 4px;
+      height: 3px;
       border-radius: 5px;
       width: 100%;
     }
 
     .menu {
-      position: absolute;
+      position: fixed;
       top: 0;
-      right: -300px;
-      width: 300px;
+      right: -100%;
+      width: 80%;
+      max-width: 300px;
       height: 100vh;
       background: var(--menu-bg-light);
       color: white;
       transition: all 0.3s ease;
-      padding-top: 50px;
+      padding-top: 60px;
       box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.1);
       z-index: 1000;
+      overflow-y: auto;
     }
 
     body.dark-mode .menu {
@@ -97,9 +105,9 @@
     .menu a {
       color: white;
       text-decoration: none;
-      padding: 15px;
+      padding: 12px 15px;
       display: block;
-      font-size: 1.2rem;
+      font-size: 1rem;
       text-align: center;
       font-weight: bold;
     }
@@ -109,16 +117,18 @@
     }
 
     .theme-toggle {
-      margin: 2rem auto;
-      padding: 10px 20px;
+      margin: 1.5rem auto;
+      padding: 8px 16px;
       display: block;
       border: none;
       border-radius: 5px;
       background: #4caf50;
       color: white;
-      font-size: 1rem;
+      font-size: 0.9rem;
       cursor: pointer;
       transition: background 0.3s ease;
+      width: 80%;
+      max-width: 200px;
     }
 
     .theme-toggle:hover {
@@ -127,26 +137,32 @@
 
     .hero {
       text-align: center;
-      padding: 8rem 2rem;
+      padding: 4rem 1rem;
+      width: 100%;
     }
 
     .hero h2 {
-      font-size: 3rem;
+      font-size: 1.8rem;
       margin-bottom: 1rem;
+      line-height: 1.3;
     }
 
     .hero p {
-      font-size: 1.2rem;
-      max-width: 800px;
-      margin: auto;
+      font-size: 1rem;
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 0 1rem;
+      line-height: 1.5;
     }
 
     .user-segment {
       display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      justify-content: space-around;
-      margin-top: 4rem;
+      flex-direction: column;
+      gap: 1.5rem;
+      justify-content: center;
+      align-items: center;
+      margin: 2rem 1rem;
+      width: calc(100% - 2rem);
     }
 
     .user-segment .cta {
@@ -154,20 +170,27 @@
       color: #333;
       border-radius: 12px;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      flex: 1 1 300px;
-      padding: 2rem 2.5rem;
+      width: 100%;
+      max-width: 400px;
+      padding: 1.5rem;
       text-align: center;
       transition: transform 0.3s ease;
     }
 
     .user-segment .cta:hover {
       background-color: #f0f0f0;
-      transform: translateY(-10px);
+      transform: translateY(-5px);
     }
 
     .cta h3 {
-      font-size: 2rem;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .cta p {
+      font-size: 0.9rem;
       margin-bottom: 1.5rem;
+      line-height: 1.4;
     }
 
     .cta button {
@@ -175,10 +198,12 @@
       color: #fff;
       border: none;
       border-radius: 6px;
-      font-size: 1rem;
-      padding: 0.7rem 1.5rem;
+      font-size: 0.9rem;
+      padding: 0.6rem 1.2rem;
       cursor: pointer;
       transition: background 0.3s ease;
+      width: 100%;
+      max-width: 200px;
     }
 
     .cta button:hover {
@@ -188,97 +213,107 @@
     footer {
       background: #333;
       color: white;
-      margin-top: 5rem;
-      padding: 1.5rem;
+      margin-top: 3rem;
+      padding: 1rem;
       text-align: center;
+      font-size: 0.8rem;
+      width: 100%;
     }
 
     #chatbot-btn {
       position: fixed;
-      bottom: 10%;
-      right: 5%;
+      bottom: 20px;
+      right: 20px;
       background: #4caf50;
       border-radius: 50%;
       color: white;
-      font-size: 2rem;
-      padding: 1rem;
+      font-size: 1.5rem;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
       cursor: pointer;
       transition: transform 0.3s ease;
+      z-index: 100;
     }
 
     #chatbot-btn:hover {
       transform: scale(1.1);
     }
 
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+    /* Prevent horizontal scrolling */
+    .container {
+      width: 100%;
+      overflow-x: hidden;
+    }
 
+    /* Media query for very small screens */
+    @media (max-width: 360px) {
       header h1 {
-        font-size: 2rem;
+        font-size: 1.3rem;
       }
-
-      .hero {
-        padding: 6rem 2rem;
+      
+      .hero h2 {
+        font-size: 1.5rem;
       }
-
-      .user-segment {
-        flex-direction: column;
-        align-items: center;
+      
+      .hero p {
+        font-size: 0.9rem;
       }
-
-      .user-segment .cta {
-        margin-bottom: 1.5rem;
+      
+      .cta h3 {
+        font-size: 1.3rem;
       }
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <h1>SafeMind</h1>
-    <div class="hamburger-menu" onclick="toggleMenu()">
-      <div></div>
-      <div></div>
-      <div></div>
+  <div class="container">
+    <header>
+      <h1>SafeMind</h1>
+      <div class="hamburger-menu" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </header>
+
+    <div class="menu" id="menu">
+      <a href="login.html">Login</a>
+      <a href="signup.html">Sign Up</a>
+      <a href="resources.html">Resources</a>
+      <a href="chat.html">Chatbot</a>
+      <button class="theme-toggle" onclick="toggleTheme()">Toggle Dark/Light Mode</button>
     </div>
-  </header>
 
-  <div class="menu" id="menu">
-    <a href="login.html">Login</a>
-    <a href="signup.html">Sign Up</a>
-    <a href="resources.html">Resources</a>
-    <a href="chat.html">Chatbot</a>
-    <button class="theme-toggle" onclick="toggleTheme()">Toggle Dark/Light Mode</button>
-  </div>
+    <section class="hero">
+      <h2>Your Mental Wellness Companion</h2>
+      <p>SafeMind helps you track your mental health, build healthy habits, and access tools to enhance your well-being — all in one place.</p>
+    </section>
 
-  <section class="hero">
-    <h2>Your Mental Wellness Companion</h2>
-    <p>SafeMind helps you track your mental health, build healthy habits, and access tools to enhance your well-being — all in one place.</p>
-  </section>
+    <section class="user-segment">
+      <div class="cta">
+        <h3>For Doctors</h3>
+        <p>Manage your patients' mental health, track their progress, and provide personalized care with SafeMind.</p>
+        <button onclick="window.location.href='login.html'">Go to Doctor's Portal</button>
+      </div>
+      <div class="cta">
+        <h3>For Patients</h3>
+        <p>Track your mood, build healthy habits, and access mental health resources with SafeMind.</p>
+        <button onclick="window.location.href='login.html'">Go to Patient's Portal</button>
+      </div>
+    </section>
 
-  <section class="user-segment">
-    <div class="cta">
-      <h3>For Doctors</h3>
-      <p>Manage your patients' mental health, track their progress, and provide personalized care with SafeMind.</p>
-      <button onclick="window.location.href='login.html'">Go to Doctor's Portal</button>
+    <footer>
+      <p>&copy; 2025 SafeMind. All rights reserved.</p>
+    </footer>
+
+    <div id="chatbot-btn" onclick="window.location.href='chat.html'">
+      💬
     </div>
-    <div class="cta">
-      <h3>For Patients</h3>
-      <p>Track your mood, build healthy habits, and access mental health resources with SafeMind.</p>
-      <button onclick="window.location.href='login.html'">Go to Patient's Portal</button>
-    </div>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 SafeMind. All rights reserved.</p>
-  </footer>
-
-  <div id="chatbot-btn" onclick="window.location.href='chat.html'">
-    💬
   </div>
 
   <script>
@@ -296,7 +331,23 @@
 
     function toggleTheme() {
       document.body.classList.toggle('dark-mode');
+      
+      // Save preference to localStorage
+      const isDarkMode = document.body.classList.contains('dark-mode');
+      localStorage.setItem('darkMode', isDarkMode);
     }
+
+    // Check for saved theme preference
+    document.addEventListener('DOMContentLoaded', function() {
+      if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+      }
+      
+      // Prevent zooming on mobile devices
+      document.addEventListener('touchmove', function(event) {
+        if (event.scale !== 1) { event.preventDefault(); }
+      }, { passive: false });
+    });
   </script>
 </body>
 </html>
