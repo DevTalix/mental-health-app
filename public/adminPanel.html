@@ -2,212 +2,487 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Admin Panel | SafeMind</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4361ee;
+      --primary-dark: #3a56d4;
+      --secondary: #3f37c9;
+      --accent: #4895ef;
+      --danger: #f72585;
+      --success: #4cc9f0;
+      --warning: #f8961e;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --gray: #6c757d;
+      --light-gray: #e9ecef;
+      --border-radius: 8px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5f7fa;
+      color: var(--dark);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    /* Header */
+    header {
+      background-color: var(--primary);
+      background-image: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
+      margin-bottom: 1.5rem;
+      box-shadow: var(--box-shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+      transform: rotate(30deg);
+    }
+
+    header h1 {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      position: relative;
+    }
+
+    header p {
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      opacity: 0.9;
+      font-weight: 300;
+    }
+
+    nav {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      position: relative;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0;
+      transition: var(--transition);
+    }
+
+    nav a:hover {
+      opacity: 0.8;
+    }
+
+    nav a i {
+      font-size: 1rem;
+    }
+
+    /* Buttons */
+    .btn {
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: var(--border-radius);
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+
+    .btn i {
+      font-size: 0.9rem;
+    }
+
+    .btn.primary {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .btn.primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn.secondary {
+      background-color: var(--light-gray);
+      color: var(--dark);
+    }
+
+    .btn.secondary:hover {
+      background-color: #d5d5d5;
+    }
+
+    .btn.danger {
+      background-color: var(--danger);
+      color: white;
+    }
+
+    .btn.danger:hover {
+      background-color: #e5177a;
+    }
+
+    .btn.success {
+      background-color: var(--success);
+      color: white;
+    }
+
+    .btn.success:hover {
+      background-color: #3db8db;
+    }
+
+    .btn.warning {
+      background-color: var(--warning);
+      color: white;
+    }
+
+    .btn.warning:hover {
+      background-color: #e68a1a;
+    }
+
+    .btn.sm {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.8rem;
+    }
+
+    /* Admin Panel Main */
+    main.admin-section {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 992px) {
+      main.admin-section {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* Cards */
+    .card {
+      background-color: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      transition: var(--transition);
+    }
+
+    .card:hover {
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    /* Section Titles */
+    section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    section h2 i {
+      font-size: 1.25rem;
+    }
+
+    /* Resource Items */
+    .resource-actions {
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .resource-item,
+    .user-item {
+      background-color: white;
+      padding: 1.25rem;
+      border-radius: var(--border-radius);
+      margin-bottom: 1rem;
+      box-shadow: var(--box-shadow);
+      transition: var(--transition);
+      border-left: 4px solid var(--primary);
+    }
+
+    .resource-item:hover,
+    .user-item:hover {
+      transform: translateX(4px);
+    }
+
+    .resource-item h4,
+    .user-item p.name {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: var(--dark);
+      font-weight: 600;
+    }
+
+    .resource-item p,
+    .user-item p.email {
+      color: var(--gray);
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+
+    .resource-item iframe {
+      width: 100%;
+      height: 200px;
+      margin: 1rem 0;
+      border-radius: var(--border-radius);
+      border: none;
+    }
+
+    .item-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    /* Links */
+    a.link {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      transition: var(--transition);
+    }
+
+    a.link:hover {
+      color: var(--secondary);
+      text-decoration: underline;
+    }
+
+    a.link i {
+      font-size: 0.8rem;
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 2rem;
+      color: var(--gray);
+    }
+
+    .empty-state i {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--light-gray);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem 0 1rem;
+      margin-top: 3rem;
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0.75rem;
+      }
+      
+      header {
+        padding: 1rem;
+      }
+      
+      .resource-actions {
+        flex-direction: column;
+      }
+      
+      .btn {
+        width: 100%;
+      }
+      
+      .item-actions {
+        flex-direction: column;
+      }
+      
+      .item-actions .btn {
+        width: 100%;
+      }
+    }
+
+    /* POS screen specific styles */
+    @media screen and (max-width: 600px) and (orientation: portrait) {
+      body {
+        font-size: 14px;
+      }
+      
+      .container {
+        padding: 0.5rem;
+      }
+      
+      .card {
+        padding: 1rem;
+      }
+      
+      .resource-item,
+      .user-item {
+        padding: 1rem;
+      }
+      
+      .resource-item iframe {
+        height: 150px;
+      }
+      
+      .btn {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.8rem;
+      }
+    }
+
+    /* Utility classes */
+    .mt-1 { margin-top: 0.5rem; }
+    .mt-2 { margin-top: 1rem; }
+    .mt-3 { margin-top: 1.5rem; }
+    .mb-1 { margin-bottom: 0.5rem; }
+    .mb-2 { margin-bottom: 1rem; }
+    .mb-3 { margin-bottom: 1.5rem; }
+    .text-center { text-align: center; }
+    .d-flex { display: flex; }
+    .align-center { align-items: center; }
+    .justify-between { justify-content: space-between; }
+    .gap-1 { gap: 0.5rem; }
+    .gap-2 { gap: 1rem; }
+  </style>
 </head>
-<style>
-      /* Reset and base styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Poppins', sans-serif;
-  background-color: #f5f7fa;
-  color: #333;
-  line-height: 1.6;
-}
-
-.container {
-  max-width: 1200px;
-  margin: auto;
-  padding: 2rem;
-}
-
-/* Header */
-header {
-  background-color: #3a7bd5;
-  background-image: linear-gradient(to right, #3a7bd5, #00d2ff);
-  color: white;
-  padding: 2rem;
-  border-radius: 12px;
-  margin-bottom: 2rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-}
-
-header p {
-  font-size: 1rem;
-  opacity: 0.9;
-}
-
-nav {
-  margin-top: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-nav a {
-  color: white;
-  text-decoration: underline;
-  font-weight: 500;
-}
-
-#logoutBtn {
-  background-color: #ff4e4e;
-  color: white;
-  border: none;
-  padding: 0.5rem 1.2rem;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: background-color 0.3s ease;
-}
-
-#logoutBtn:hover {
-  background-color: #e03d3d;
-}
-
-/* Admin Panel Main */
-main.admin-section {
-  display: grid;
-  gap: 2rem;
-}
-
-/* Section Titles */
-section h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: #2b4c7e;
-}
-
-/* Buttons */
-.btn {
-  padding: 0.6rem 1.2rem;
-  border: none;
-  border-radius: 6px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn.primary {
-  background-color: #3a7bd5;
-  color: white;
-  margin-right: 1rem;
-}
-
-.btn.primary:hover {
-  background-color: #2f68c2;
-}
-
-.btn.secondary {
-  background-color: #e0e0e0;
-  color: #333;
-  margin-top: 0.5rem;
-}
-
-.btn.secondary:hover {
-  background-color: #d5d5d5;
-}
-
-/* Resource Items */
-.resource-actions {
-  margin-bottom: 1.5rem;
-}
-
-.resource-item,
-.user-item {
-  background-color: white;
-  padding: 1rem;
-  border-radius: 10px;
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.resource-item h4,
-.user-item p {
-  margin-bottom: 0.5rem;
-}
-
-.resource-item iframe {
-  width: 100%;
-  height: 250px;
-  margin-top: 0.5rem;
-  border-radius: 8px;
-}
-
-/* Links */
-a {
-  color: #007bff;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 2rem 0 1rem;
-  margin-top: 3rem;
-  color: #888;
-  font-size: 0.9rem;
-}
-
-</style>
 <body>
   <div class="container">
     <header>
-      <h1>Admin Panel</h1>
+      <h1><i class="fas fa-shield-alt"></i> Admin Dashboard</h1>
       <p>Manage SafeMind's content and users</p>
       <nav>
-        <a href="index.html">Back to Dashboard</a>
-        <button id="logoutBtn">Logout</button>
+        <a href="index.html"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+        <button id="logoutBtn" class="btn danger"><i class="fas fa-sign-out-alt"></i> Logout</button>
       </nav>
     </header>
 
     <main class="admin-section">
       <section class="resource-management">
-        <h2>Manage Resources</h2>
-        <div class="resource-actions">
-          <button id="addArticleBtn" class="btn primary">Add Article</button>
-          <button id="addVideoBtn" class="btn primary">Add Video</button>
-          <button id="addSupportServiceBtn" class="btn primary">Add Support Service</button>
-        </div>
+        <h2><i class="fas fa-book"></i> Content Management</h2>
+        
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Resources</h3>
+            <div class="resource-actions">
+              <button id="addArticleBtn" class="btn primary"><i class="fas fa-plus"></i> Add Article</button>
+              <button id="addVideoBtn" class="btn primary"><i class="fas fa-plus"></i> Add Video</button>
+              <button id="addSupportServiceBtn" class="btn primary"><i class="fas fa-plus"></i> Add Service</button>
+            </div>
+          </div>
 
-        <div class="resource-list">
-          <h3>Articles</h3>
-          <div id="articleList"></div>
+          <div class="resource-list">
+            <h3 class="mt-2"><i class="fas fa-newspaper"></i> Articles</h3>
+            <div id="articleList" class="mt-1">
+              <div class="empty-state">
+                <i class="fas fa-newspaper"></i>
+                <p>No articles available</p>
+              </div>
+            </div>
 
-          <h3>Videos</h3>
-          <div id="videoList"></div>
+            <h3 class="mt-3"><i class="fas fa-video"></i> Videos</h3>
+            <div id="videoList" class="mt-1">
+              <div class="empty-state">
+                <i class="fas fa-video"></i>
+                <p>No videos available</p>
+              </div>
+            </div>
 
-          <h3>Support Services</h3>
-          <div id="supportServiceList"></div>
+            <h3 class="mt-3"><i class="fas fa-hands-helping"></i> Support Services</h3>
+            <div id="supportServiceList" class="mt-1">
+              <div class="empty-state">
+                <i class="fas fa-hands-helping"></i>
+                <p>No support services available</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       <section class="user-management">
-        <h2>User Management</h2>
-        <div id="userList">
-          <!-- Dynamically load users here -->
+        <h2><i class="fas fa-users"></i> User Management</h2>
+        
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Registered Users</h3>
+            <button id="refreshUsersBtn" class="btn success sm"><i class="fas fa-sync-alt"></i> Refresh</button>
+          </div>
+          
+          <div id="userList">
+            <div class="empty-state">
+              <i class="fas fa-user"></i>
+              <p>No users available</p>
+            </div>
+          </div>
         </div>
       </section>
     </main>
 
     <footer>
-      <p>&copy; 2025 SafeMind. Admin Panel</p>
+      <p>&copy; 2025 SafeMind. All rights reserved.</p>
+      <p class="mt-1">Admin Panel v2.0</p>
     </footer>
   </div>
 
@@ -217,6 +492,7 @@ footer {
     import { getDatabase, ref, get, remove } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js';
 
     const logoutBtn = document.getElementById('logoutBtn');
+    const refreshUsersBtn = document.getElementById('refreshUsersBtn');
     const db = getDatabase();
 
     const articlesRef = ref(db, 'resources/articles/');
@@ -228,12 +504,38 @@ footer {
     logoutBtn.addEventListener('click', () => {
       signOut(auth)
         .then(() => {
-          window.location.href = 'index.html'; // Redirect to the login page after logout
+          window.location.href = 'index.html';
         })
         .catch((error) => {
           console.error("Error signing out:", error.message);
+          alert("Error signing out. Please try again.");
         });
     });
+
+    // Refresh users
+    refreshUsersBtn.addEventListener('click', () => {
+      loadUsers();
+      showToast("User list refreshed");
+    });
+
+    // Function to show toast messages
+    function showToast(message, type = 'success') {
+      const toast = document.createElement('div');
+      toast.className = `toast toast-${type}`;
+      toast.textContent = message;
+      document.body.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.classList.add('show');
+      }, 10);
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => {
+          document.body.removeChild(toast);
+        }, 300);
+      }, 3000);
+    }
 
     // Function to load resources
     function loadResources() {
@@ -242,22 +544,31 @@ footer {
         const articleList = document.getElementById('articleList');
         if (snapshot.exists()) {
           const articles = snapshot.val();
-          articleList.innerHTML = ''; // Clear previous articles
+          articleList.innerHTML = '';
           Object.keys(articles).forEach((key) => {
             const article = articles[key];
             const articleElement = document.createElement('div');
             articleElement.classList.add('resource-item');
             articleElement.innerHTML = `
               <h4>${article.title}</h4>
-              <p>${article.description}</p>
-              <a href="${article.link}" target="_blank">View Article</a>
-              <button class="btn secondary" onclick="deleteResource('articles', '${key}')">Delete</button>
+              <p>${article.description || 'No description provided'}</p>
+              <a href="${article.link}" target="_blank" class="link"><i class="fas fa-external-link-alt"></i> View Article</a>
+              <div class="item-actions">
+                <button class="btn danger sm" onclick="deleteResource('articles', '${key}')"><i class="fas fa-trash"></i> Delete</button>
+              </div>
             `;
             articleList.appendChild(articleElement);
           });
         } else {
-          articleList.innerHTML = '<p>No articles available.</p>';
+          articleList.innerHTML = `
+            <div class="empty-state">
+              <i class="fas fa-newspaper"></i>
+              <p>No articles available</p>
+            </div>
+          `;
         }
+      }).catch((error) => {
+        console.error("Error loading articles:", error);
       });
 
       // Load Videos
@@ -265,21 +576,31 @@ footer {
         const videoList = document.getElementById('videoList');
         if (snapshot.exists()) {
           const videos = snapshot.val();
-          videoList.innerHTML = ''; // Clear previous videos
+          videoList.innerHTML = '';
           Object.keys(videos).forEach((key) => {
             const video = videos[key];
             const videoElement = document.createElement('div');
             videoElement.classList.add('resource-item');
             videoElement.innerHTML = `
               <h4>${video.title}</h4>
-              <iframe src="${video.link}" frameborder="0" allowfullscreen></iframe>
-              <button class="btn secondary" onclick="deleteResource('videos', '${key}')">Delete</button>
+              ${video.description ? `<p>${video.description}</p>` : ''}
+              <iframe src="${video.link}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <div class="item-actions">
+                <button class="btn danger sm" onclick="deleteResource('videos', '${key}')"><i class="fas fa-trash"></i> Delete</button>
+              </div>
             `;
             videoList.appendChild(videoElement);
           });
         } else {
-          videoList.innerHTML = '<p>No videos available.</p>';
+          videoList.innerHTML = `
+            <div class="empty-state">
+              <i class="fas fa-video"></i>
+              <p>No videos available</p>
+            </div>
+          `;
         }
+      }).catch((error) => {
+        console.error("Error loading videos:", error);
       });
 
       // Load Support Services
@@ -287,74 +608,151 @@ footer {
         const supportServiceList = document.getElementById('supportServiceList');
         if (snapshot.exists()) {
           const supportServices = snapshot.val();
-          supportServiceList.innerHTML = ''; // Clear previous services
+          supportServiceList.innerHTML = '';
           Object.keys(supportServices).forEach((key) => {
             const service = supportServices[key];
             const serviceElement = document.createElement('div');
             serviceElement.classList.add('resource-item');
             serviceElement.innerHTML = `
               <h4>${service.name}</h4>
-              <p>${service.description}</p>
-              <a href="${service.link}" target="_blank">Contact Service</a>
-              <button class="btn secondary" onclick="deleteResource('supportServices', '${key}')">Delete</button>
+              <p>${service.description || 'No description provided'}</p>
+              <a href="${service.link}" target="_blank" class="link"><i class="fas fa-external-link-alt"></i> Contact Service</a>
+              <div class="item-actions">
+                <button class="btn danger sm" onclick="deleteResource('supportServices', '${key}')"><i class="fas fa-trash"></i> Delete</button>
+              </div>
             `;
             supportServiceList.appendChild(serviceElement);
           });
         } else {
-          supportServiceList.innerHTML = '<p>No support services available.</p>';
+          supportServiceList.innerHTML = `
+            <div class="empty-state">
+              <i class="fas fa-hands-helping"></i>
+              <p>No support services available</p>
+            </div>
+          `;
         }
+      }).catch((error) => {
+        console.error("Error loading support services:", error);
       });
+    }
 
-      // Load Users
+    // Function to load users
+    function loadUsers() {
       get(usersRef).then((snapshot) => {
         const userList = document.getElementById('userList');
         if (snapshot.exists()) {
           const users = snapshot.val();
-          userList.innerHTML = ''; // Clear previous users
+          userList.innerHTML = '';
           Object.keys(users).forEach((key) => {
             const user = users[key];
             const userElement = document.createElement('div');
             userElement.classList.add('user-item');
             userElement.innerHTML = `
-              <p>${user.name} - ${user.email}</p>
-              <button class="btn secondary" onclick="deleteUser('${key}')">Delete User</button>
+              <p class="name"><i class="fas fa-user"></i> ${user.name || 'Unknown User'}</p>
+              <p class="email"><i class="fas fa-envelope"></i> ${user.email}</p>
+              <div class="item-actions">
+                <button class="btn danger sm" onclick="deleteUser('${key}')"><i class="fas fa-trash"></i> Delete User</button>
+              </div>
             `;
             userList.appendChild(userElement);
           });
         } else {
-          userList.innerHTML = '<p>No users available.</p>';
+          userList.innerHTML = `
+            <div class="empty-state">
+              <i class="fas fa-user"></i>
+              <p>No users available</p>
+            </div>
+          `;
         }
+      }).catch((error) => {
+        console.error("Error loading users:", error);
       });
     }
 
     // Delete resource function
     function deleteResource(resourceType, key) {
-      const resourceRef = ref(db, `resources/${resourceType}/${key}`);
-      remove(resourceRef)
-        .then(() => {
-          alert(`${resourceType.slice(0, -1)} deleted successfully.`);
-          loadResources(); // Reload resources after deletion
-        })
-        .catch((error) => {
-          console.error(`Error deleting ${resourceType}:`, error.message);
-        });
+      if (confirm(`Are you sure you want to delete this ${resourceType.slice(0, -1)}?`)) {
+        const resourceRef = ref(db, `resources/${resourceType}/${key}`);
+        remove(resourceRef)
+          .then(() => {
+            showToast(`${resourceType.slice(0, -1)} deleted successfully`, 'success');
+            loadResources();
+          })
+          .catch((error) => {
+            console.error(`Error deleting ${resourceType}:`, error.message);
+            showToast(`Failed to delete ${resourceType.slice(0, -1)}`, 'danger');
+          });
+      }
     }
 
     // Delete user function
     function deleteUser(userId) {
-      const userRef = ref(db, `users/${userId}`);
-      remove(userRef)
-        .then(() => {
-          alert('User deleted successfully.');
-          loadResources(); // Reload user list after deletion
-        })
-        .catch((error) => {
-          console.error('Error deleting user:', error.message);
-        });
+      if (confirm('Are you sure you want to delete this user? This action cannot be undone.')) {
+        const userRef = ref(db, `users/${userId}`);
+        remove(userRef)
+          .then(() => {
+            showToast('User deleted successfully', 'success');
+            loadUsers();
+          })
+          .catch((error) => {
+            console.error('Error deleting user:', error.message);
+            showToast('Failed to delete user', 'danger');
+          });
+      }
     }
 
     // Initialize admin panel
-    loadResources();
+    document.addEventListener('DOMContentLoaded', () => {
+      loadResources();
+      loadUsers();
+    });
+
+    // Make functions available globally
+    window.deleteResource = deleteResource;
+    window.deleteUser = deleteUser;
   </script>
+  
+  <style>
+    /* Toast notifications */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--dark);
+      color: white;
+      padding: 12px 24px;
+      border-radius: var(--border-radius);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1000;
+      max-width: 90%;
+      text-align: center;
+    }
+    
+    .toast.show {
+      opacity: 1;
+    }
+    
+    .toast-success {
+      background-color: var(--success);
+    }
+    
+    .toast-danger {
+      background-color: var(--danger);
+    }
+    
+    .toast-warning {
+      background-color: var(--warning);
+    }
+    
+    @media (max-width: 768px) {
+      .toast {
+        width: 90%;
+        bottom: 10px;
+      }
+    }
+  </style>
 </body>
 </html>
